@@ -70,9 +70,11 @@ describe('mongoose-dummy', () => {
             let model = mongoose.model('Student', schemaDefinition);
             let randomObject = dummy(model, {
                 ignore: ignoredFields,
-                returnDate: true
+                returnDate: true,
+                force: {
+                  parent: '5af8a4f33f56930349d8f45b'
+                }
             })
-
             expect(randomObject).to.not.be.null;
             randomObject.name.should.be.a('string');
             randomObject.email.should.be.a('string');
@@ -84,6 +86,7 @@ describe('mongoose-dummy', () => {
             randomObject.results.should.be.an('array');
             randomObject.results[0].should.have.property('score');
             randomObject.is_student.should.be.a('boolean');
+            randomObject.parent.should.equal('5af8a4f33f56930349d8f45b')
             isObjectId(randomObject.parent).should.be.true;
 
             // Check ignore fields
