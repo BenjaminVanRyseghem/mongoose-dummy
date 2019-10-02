@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 process.env.NODE_ENV = 'test';
 
 const chai = require("chai");
@@ -17,7 +17,7 @@ describe('mongoose-dummy', () => {
     describe('generateRandomModel', () => {
         it('should generate random model', (done) => {
             const ignoredFields = ['_id', 'created_at', '__v', /detail.*_info/];
-            let genderValues = ['Male', 'Female']
+            let genderValues = ['Male', 'Female'];
             let schemaDefinition = new mongoose.Schema({
                 name: {
                     type: String,
@@ -95,7 +95,7 @@ describe('mongoose-dummy', () => {
                 force: {
                   parent: '5af8a4f33f56930349d8f45b'
                 }
-            })
+            });
             expect(randomObject).to.not.be.null;
             randomObject.name.should.be.a('string');
             randomObject.email.should.be.a('string');
@@ -107,7 +107,7 @@ describe('mongoose-dummy', () => {
             randomObject.results.should.be.an('array');
             randomObject.results[0].should.have.property('score');
             randomObject.is_student.should.be.a('boolean');
-            randomObject.parent.should.equal('5af8a4f33f56930349d8f45b')
+            randomObject.parent.should.equal('5af8a4f33f56930349d8f45b');
             randomObject.school.name.should.be.a('string');
             randomObject.school.description.should.be.a('string');
             randomObject.books.should.be.an('array');
