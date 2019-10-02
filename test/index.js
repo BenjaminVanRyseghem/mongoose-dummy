@@ -57,6 +57,10 @@ describe('mongoose-dummy', () => {
                 parent: {
                     type: mongoose.Schema.Types.ObjectId
                 },
+                school: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "School"
+                },
                 detail: {
                     main_info: String,
                     some_info: String,
@@ -71,6 +75,7 @@ describe('mongoose-dummy', () => {
             let randomObject = dummy(model, {
                 ignore: ignoredFields,
                 returnDate: true,
+                resolveRef: ref => `${__dirname}/${ref.toLowerCase()}.js`,
                 force: {
                   parent: '5af8a4f33f56930349d8f45b'
                 }
@@ -87,6 +92,8 @@ describe('mongoose-dummy', () => {
             randomObject.results[0].should.have.property('score');
             randomObject.is_student.should.be.a('boolean');
             randomObject.parent.should.equal('5af8a4f33f56930349d8f45b')
+            randomObject.school.name.should.be.a('string');
+            randomObject.school.description.should.be.a('string');
             isObjectId(randomObject.parent).should.be.true;
 
             // Check ignore fields
